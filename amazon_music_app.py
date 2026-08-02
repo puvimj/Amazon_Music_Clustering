@@ -80,7 +80,7 @@ st.markdown("""
 @st.cache_data
 def load_data():
 
-    df = pd.read_csv("data\Amazon_Music_Clustered_Final.csv")
+    df = pd.read_csv("data/Amazon_Music_Clustered_Final.csv")
 
     return df
 
