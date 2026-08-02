@@ -19,46 +19,21 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.block-container {
-    padding-top: 0.5rem !important;
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
-# ============================================================
-# CUSTOM CSS
-# ============================================================
-
-st.markdown("""
-<style>
-
-.main {
-    background-color: #f7f9fc;
-}
-
-[data-testid="stSidebar"] {
-    background-color: grey;
-}
-
-[data-testid="stSidebar"] * {
-    color: white;
-}
-
-.dashboard-title {
-    font-size: 38px;
-    font-weight: 700;
-}
-
-.dashboard-subtitle {
-    font-size: 18px;
-    color: #6b7280;
-}
+    /* Reduce top and side padding of main page */
+    .block-container {
+        padding-top: 1.5rem;
+        padding-bottom: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 
 </style>
 """, unsafe_allow_html=True)
 
+
+# ---------------------------------------------------------
+# CSS FOR METRIC
+# ---------------------------------------------------------
 st.markdown("""
 <style>
 
@@ -69,6 +44,164 @@ st.markdown("""
 [data-testid="stMetricValue"] {
     font-size: 22px !important;
 }
+
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# HEADER IMAGE
+# ---------------------------------------------------------
+from pathlib import Path
+header_path = Path("images/music_header.png")
+
+if header_path.exists():
+    st.image(
+        str(header_path),
+        width="stretch"
+    )
+else:
+    st.error("Header image not found!")
+
+# ============================================================
+# BACKGROUND IMAGE
+# ============================================================
+import streamlit as st
+
+st.set_page_config(layout="wide")
+
+st.markdown("""
+    <style>
+        [data-testid="stAppViewContainer"] {
+            background: linear-gradient(180deg, 
+                #d4d8dc 0%,      /* smoky gray top */
+                #c9ccd4 25%,     
+                #d8ccd0 50%,     
+                #e0b8bc 75%,     /* transitioning to pink */
+                #d99a9e 100%     /* rose/pink bottom */
+            );
+        }
+
+        [data-testid="stHeader"] {
+            background: rgba(0,0,0,0);
+        }
+
+        .block-container {
+            padding-top: 2rem;
+        }
+
+        div[data-testid="stMetric"], 
+        div[data-testid="stDataFrame"],
+        div[data-testid="stVerticalBlockBorderWrapper"] {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+""", unsafe_allow_html=True)
+# ============================================================
+# CUSTOM CSS
+# ============================================================
+
+# ---------------------------------------------------------
+# SIDEBAR STYLING
+# ---------------------------------------------------------
+st.markdown("""
+<style>
+
+    /* Sidebar background */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(
+            180deg,
+            #090f1f 0%,
+            #111936 55%,
+            #1b123d 100%
+        );
+    }
+
+    /* Sidebar overall spacing */
+    [data-testid="stSidebar"] > div:first-child {
+        padding-top: 1.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Music Explorer title */
+    .sidebar-title {
+        font-size: 25px;
+        font-weight: 750;
+        color: white;
+        margin-bottom: 2px;
+    }
+
+    /* Subtitle */
+    .sidebar-subtitle {
+        font-size: 11px;
+        color: #a9b0c8;
+        letter-spacing: 1.2px;
+        margin-left: 4px;
+        margin-bottom: 22px;
+    }
+
+    /* Divider */
+    .sidebar-line {
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            #4b4f75,
+            transparent
+        );
+        margin-bottom: 22px;
+    }
+
+    /* Navigation heading */
+    [data-testid="stSidebar"] .stRadio > label {
+        color: #c8cce0 !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        margin-bottom: 8px;
+    }
+
+    /* Navigation options */
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] {
+        gap: 7px;
+    }
+
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {
+        background: rgba(255,255,255,0.045);
+        border: 1px solid rgba(255,255,255,0.035);
+        border-radius: 12px;
+        padding: 9px 10px;
+        transition: all 0.2s ease;
+    }
+
+    /* Hover */
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {
+        background: rgba(151, 82, 255, 0.16);
+        border-color: rgba(151, 82, 255, 0.35);
+        transform: translateX(3px);
+    }
+
+    /* Navigation text */
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label p {
+        color: #eef0fa !important;
+        font-size: 14px !important;
+    }
+
+    /* Footer */
+    .sidebar-footer {
+        position: fixed;
+        bottom: 18px;
+        left: 20px;
+        color: #858ca8;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .sidebar-footer span {
+        color: #b66cff;
+    }
 
 </style>
 """, unsafe_allow_html=True)
@@ -186,42 +319,61 @@ st.markdown("<br>", unsafe_allow_html=True)
 # HEADER
 # ============================================================
 
-st.markdown(
-    '<div class="dashboard-title">'
-    '🎵 Amazon Music Clustering '
-    '</div>',
-    unsafe_allow_html=True
-)
+# st.markdown(
+#     '<div class="dashboard-title">'
+#     '🎵 Amazon Music Clustering '
+#     '</div>',
+#     unsafe_allow_html=True
+# )
 
 
-st.markdown(
-    '<div class="dashboard-subtitle">'
-    'Discovering music profiles using K-Means clustering'
-    '</div>',
-    unsafe_allow_html=True
-)
+# st.markdown(
+#     '<div class="dashboard-subtitle">'
+#     'Discovering music profiles using K-Means clustering'
+#     '</div>',
+#     unsafe_allow_html=True
+# )
 
-st.markdown("---")
+# st.markdown("---")
 # ============================================================
 # SIDEBAR
 # ============================================================
+with st.sidebar:
 
-st.sidebar.title("🎵 Music Explorer")
+    st.markdown(
+        """
+        <div class="sidebar-title">🎵 Music Explorer</div>
 
-st.sidebar.markdown("---")
+        <div class="sidebar-subtitle">
+            AMAZON MUSIC • ML DASHBOARD
+        </div>
 
-page = st.sidebar.radio(
-    "Navigate",
-    [
-        "🏠 Overview",
-        "🎯 Cluster Profiles",
-        "📊 Visualizations",
-        "🎶 Top Tracks",
-        "🔎 Song Explorer"
-    ]
-)
+        <div class="sidebar-line"></div>
+        """,
+        unsafe_allow_html=True
+    )
 
+    page = st.radio(
+        "Navigate",
+        [
+            "🏠 Overview",
+            "🎯 Cluster Profiles",
+            "📊 Visualizations",
+            "🎶 Top Tracks",
+            "🔎 Song Explorer"
+        ],
+        label_visibility="visible"
+    )
 
+    st.markdown(
+        """
+        <div class="sidebar-footer">
+            <span>●</span> K-Means Clustering<br>
+            <span>♪</span> Music Intelligence
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 # ============================================================
 # PAGE 1 — OVERVIEW
 # ============================================================
@@ -521,7 +673,7 @@ elif page == "🎯 Cluster Profiles":
         x="Feature",
         y="Average Value",
         ax=ax,
-        color="#E99145",
+        color='#2E6F7E',
     )
 
     ax.set_title(
